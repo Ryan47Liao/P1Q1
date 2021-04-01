@@ -68,7 +68,9 @@ def UI():
     print("Graph: str (source node) -> [str] (sorted destination nodes)")
     graph_as_str(Graph)
     while True:
-        start = input(' Input one starting node (or input done): ')
+        start = prompt.for_string(' Input one starting node (or input done)', 
+                                   is_legal = lambda start: start in Graph or start == 'done'
+                                   ,error_message= "Illegal: not a source node")
         if start == "done":
             return 
         tracing = prompt.for_bool("Input tracing algorithm option", True, "Enter False to disable tracing")
