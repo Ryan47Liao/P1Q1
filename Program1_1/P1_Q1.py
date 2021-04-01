@@ -25,8 +25,8 @@ def graph_as_str(graph:dict)->str:
     also sorted. 
     """
     STR = ""
-    for node in sorted(list(graph.items())):
-        STR += node[0] + "->" + str(sorted(node[1])) + "\n"
+    for SourceNode,DestinationNodes in sorted(list(graph.items())):
+        STR += SourceNode + "->" + str(DestinationNodes) + "\n"
     print(STR)
     return STR
     
@@ -77,6 +77,8 @@ def UI():
         print(f"From the starting node {start}, its reachable nodes are:",reachable(Graph,start,tracing))
         
 if __name__ == "__main__":
+    #graph = read_graph(open('graph1.txt'))
+    #graph_as_str(graph)
     UI()
     
     
