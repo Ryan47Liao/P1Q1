@@ -15,20 +15,18 @@ def read_graph(file)->dict:
         if line.split(";")[0] in Dict:
             Dict[line.split(";")[0]].append(line.split(";")[1])
         else:
-            Dict[line.split(";")[0]] = [line.split(";")[1]]
+            Dict[line.split(";")[0]] = list(line.split(";")[1])
     return Dict
     
-def graph_as_str(Dict:dict)->str:
+def graph_as_str(graph:dict)->str:
     """
     This function takes in a dictionary of a graph and returns a multi-line string 
     that is sorted by the keys of the dictionary. And the items of the dictionary is 
     also sorted. 
     """
     STR = ""
-    Skeys = sorted(list(Dict.keys()))
-    for k in Skeys:
-        Sitems = sorted(Dict[k])
-        STR += k + "->" + str(Sitems) + "\n"
+    for node in sorted(list(graph.items())):
+        STR += node[0] + "->" + str(sorted(node[1])) + "\n"
     print(STR)
     return STR
     
@@ -74,11 +72,10 @@ def UI():
         if start == "done":
             return 
         tracing = prompt.for_bool("Input tracing algorithm option", True, "Enter False to disable tracing")
-        print("From the starting node e, its reachable nodes are:",reachable(Graph,start,tracing))
+        print(f"From the starting node {start}, its reachable nodes are:",reachable(Graph,start,tracing))
         
 if __name__ == "__main__":
     UI()
-    
     
     
 #Write a script at the bottom of this module (in if __name__ == '__main__':) that prompts the user to enter the file storing the graph and start node (rejecting any string that is not a source node in the graph) or the word done; calls these functions with the entered information to solve the problem, and print the appropriate information: the graph and the set containing all the node labels (body is 9 lines).
